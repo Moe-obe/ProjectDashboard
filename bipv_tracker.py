@@ -14,11 +14,19 @@ st.set_page_config(layout="wide")
 # Project data storage
 PROJECTS_FILE = "projects.json"
 
+import requests
+
+GITHUB_RAW_URL = "https://raw.githubusercontent.com/Moe-obe/bipv-tracker/main/projects.json"
+
 def load_projects():
-    if os.path.exists(PROJECTS_FILE):
-        with open(PROJECTS_FILE, 'r') as f:
-            return json.load(f)
-    return {}
+    try:
+        response = requests.get(GITHUB_RAW_URL)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {}
+    except:
+        return {}
 
 def save_projects(projects):
     with open(PROJECTS_FILE, 'w') as f:
