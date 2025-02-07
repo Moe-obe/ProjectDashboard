@@ -1,5 +1,6 @@
 streamlit as st
 pandas as pd
+plotly
 plotly.express as px
 datetime import datetime
 json
